@@ -8,4 +8,38 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="LoginMargins">
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="LoginMainDescription" parent="LoginMargins">
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="LoginLoginField" parent="LoginMargins">
+        <item name="android:layout_marginTop">4dp</item>
+    </style>
+
+    <style name="LoginMainActionBtn" parent="LoginMargins">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/main_action_btn</item>
+    </style>
+    
+    <style name="LoginAdditionalBtn" parent="LoginMargins">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <style name="LoginTip" parent="LoginMargins">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

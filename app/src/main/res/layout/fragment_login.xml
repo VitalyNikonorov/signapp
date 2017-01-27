@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/login_description"
+        android:text="@string/login_description_title"
+        style="@style/LoginMainDescription" />
+
+    <EditText
+        android:id="@+id/login_login_field"
+        android:hint="@string/email"
+        style="@style/LoginLoginField"/>
+
+    <Button
+        android:id="@+id/login_action_btn"
+        android:text="@string/get_code"
+        style="@style/LoginMainActionBtn" />
+
+    <TextView
+        android:id="@+id/additional_btn"
+        style="@style/LoginAdditionalBtn"
+        android:text="@string/pass_entering"/>
+
+    <TextView
+        android:id="@+id/login_tip_tv"
+        android:text="@string/login_tip"
+        style="@style/LoginTip"/>
+
+</LinearLayout>
