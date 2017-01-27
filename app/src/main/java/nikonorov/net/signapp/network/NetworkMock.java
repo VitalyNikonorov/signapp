@@ -24,7 +24,12 @@ import rx.schedulers.Schedulers;
 @Module
 public class NetworkMock implements NetworkManager {
     private final long DELAY = 1500l;
-    private final String RIGHT_EMAIL = "1@1.com";
+    private final String RIGHT_PHONE_EMAIL = "1@1.com";
+    private final String RIGHT_EMAIL = "a@a.com";
+
+    private final String PHONE = " телефон +7916*****89";
+    private final String EMAIL = " почту a@a.com";
+
 
     public NetworkMock() {
     }
@@ -59,7 +64,9 @@ public class NetworkMock implements NetworkManager {
                         if (isNetworkAvailable()){
 
                             if (RIGHT_EMAIL.equals(s)){
-                                return new NetworkResponse(CodeResponse.OK, s);
+                                return new NetworkResponse(CodeResponse.OK, EMAIL);
+                            } else if (RIGHT_PHONE_EMAIL.equals(s)){
+                                return new NetworkResponse(CodeResponse.OK, PHONE);
                             } else {
                                 return new NetworkResponse(CodeResponse.WRONG_EMAIL, appContext.getString(R.string.wrong_email));
                             }

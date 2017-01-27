@@ -69,6 +69,7 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                         view.hidePreloader();
                         switch (networkResponse.code){
                             case OK: {
+                                view.setDescription(networkResponse.msg, FragmentType.ENTER_ONE_PASS_FRAGMENT);
                                 view.setFragment(FragmentType.ENTER_ONE_PASS_FRAGMENT, true);
                                 break;
                             }

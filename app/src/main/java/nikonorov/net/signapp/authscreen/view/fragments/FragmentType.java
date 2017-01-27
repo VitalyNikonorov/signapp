@@ -19,7 +19,7 @@ public enum FragmentType {
     ENTER_ONE_PASS_FRAGMENT(
             1,
             R.string.entering,
-            R.string.login_description_title,
+            R.string.type_code_send_on,
             new int[] {R.string.code},
             R.string.enter,
             R.string.resend_code,

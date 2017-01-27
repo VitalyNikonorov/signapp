@@ -85,6 +85,11 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
         return fragments[type.id].getAuthData();
     }
 
+    @Override
+    public void setDescription(String s, FragmentType type) {
+        fragments[type.id].setDescription(s);
+    }
+
     public void onFragmentRestored(FragmentType type){
         presenter.onFragmentRestored(type);
     }

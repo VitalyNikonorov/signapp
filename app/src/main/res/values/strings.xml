@@ -10,7 +10,7 @@
     <string name="sending_status">Отправка кода. \nПодождите…</string>
     <string name="network_error_description">Не удалось подключиться. Проверьте интернет-соединение.</string>
     <string name="wrong_email">Неверный адрес электронной почты</string>
-    <string name="type_code_send_on">Введите код (отправлен на %s)</string>
+    <string name="type_code_send_on" formatted="false">Введите код (отправлен на %s)</string>
     <string name="enter">Войти</string>
     <string name="resend_code">Выслать код повторно%s</string>
     <string name="code">Код</string>

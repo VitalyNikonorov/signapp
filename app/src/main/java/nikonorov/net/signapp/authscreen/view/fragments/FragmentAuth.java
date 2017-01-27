@@ -13,6 +13,7 @@ import android.widget.TextView;
 import nikonorov.net.signapp.R;
 import nikonorov.net.signapp.authscreen.model.AuthData;
 import nikonorov.net.signapp.authscreen.view.AuthActivity;
+import nikonorov.net.signapp.utils.Logger;
 
 /**
  * Created by vitaly on 27.01.17.
@@ -28,6 +29,7 @@ public class FragmentAuth extends Fragment {
     private Button mainActionBtn;
 
     private FragmentType type;
+    private String sendOn;
 
     public void setType(FragmentType type) {
         this.type = type;
@@ -41,6 +43,7 @@ public class FragmentAuth extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        description.setText(getString(type.description, sendOn));
         ((AuthActivity)getActivity()).onFragmentRestored(type);
     }
 
@@ -71,6 +74,10 @@ public class FragmentAuth extends Fragment {
             pass = passField.getText().toString();
         }
         return new AuthData(login, pass);
+    }
+
+    public void setDescription(String s){
+        sendOn = s;
     }
 
     private void initView() {
