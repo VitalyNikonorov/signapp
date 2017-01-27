@@ -8,5 +8,6 @@ public enum CodeResponse {
 
     OK,
     WRONG_EMAIL,
+    WRONG_CODE,
     NETWORK_ERROR;
 }

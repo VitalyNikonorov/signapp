@@ -28,7 +28,12 @@ public class ModelAuthScreenImpl implements ModelAuthScreen {
     }
 
     @Override
-    public Observable<NetworkResponse> requestOnTimePass(AuthData data) {
+    public Observable<NetworkResponse> requestOneTimePass(AuthData data) {
         return networkManager.requestOnTimePass(data);
+    }
+
+    @Override
+    public Observable<NetworkResponse> enterByCode(AuthData data) {
+        return networkManager.enterByCode(data);
     }
 }

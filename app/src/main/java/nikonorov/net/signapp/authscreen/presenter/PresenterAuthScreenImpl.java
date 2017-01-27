@@ -52,7 +52,7 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                 view.showPreloader();
                 AuthData data = view.getAuthData(currentFragment);
 
-                Subscription subscription = model.requestOnTimePass(data).subscribe(new Observer<NetworkResponse>() {
+                Subscription subscription = model.requestOneTimePass(data).subscribe(new Observer<NetworkResponse>() {
                     @Override
                     public void onCompleted() {
                         view.hidePreloader();
@@ -87,6 +87,39 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
             }
             case ENTER_ONE_PASS_FRAGMENT: {
 
+                view.showPreloader();
+                AuthData data = view.getAuthData(currentFragment);
+
+                Subscription subscription = model.enterByCode(data).subscribe(new Observer<NetworkResponse>() {
+                    @Override
+                    public void onCompleted() {
+                        view.hidePreloader();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.hidePreloader();
+                        Logger.e(PresenterAuthScreen.class.getName(), e);
+                    }
+
+                    @Override
+                    public void onNext(NetworkResponse networkResponse) {
+                        view.hidePreloader();
+                        switch (networkResponse.code){
+                            case OK: {
+                                view.setDescription(networkResponse.msg, FragmentType.ENTER_ONE_PASS_FRAGMENT);
+                                view.setFragment(FragmentType.ENTER_ONE_PASS_FRAGMENT, true);
+                                break;
+                            }
+                            case NETWORK_ERROR:
+                            case WRONG_CODE:{
+                                view.showErrorMessage(networkResponse.msg);
+                                break;
+                            }
+                        }
+                    }
+                });
+                subscriptions.add(subscription);
                 break;
             }
             case REGULAR_PASS_FRAGMENT: {

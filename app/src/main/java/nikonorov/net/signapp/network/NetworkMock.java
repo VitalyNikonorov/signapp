@@ -27,6 +27,10 @@ public class NetworkMock implements NetworkManager {
     private final String RIGHT_PHONE_EMAIL = "1@1.com";
     private final String RIGHT_EMAIL = "a@a.com";
 
+    private final String TOKEN = "00000";
+
+    private final String RIGHT_CODE = "00000";
+
     private final String PHONE = " телефон +7916*****89";
     private final String EMAIL = " почту a@a.com";
 
@@ -69,6 +73,29 @@ public class NetworkMock implements NetworkManager {
                                 return new NetworkResponse(CodeResponse.OK, PHONE);
                             } else {
                                 return new NetworkResponse(CodeResponse.WRONG_EMAIL, appContext.getString(R.string.wrong_email));
+                            }
+                        } else {
+                            return new NetworkResponse(CodeResponse.NETWORK_ERROR, appContext.getString(R.string.network_error_description));
+                        }
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public Observable<NetworkResponse> enterByCode(AuthData data) {
+        return Observable.just(data.login)
+                .delay(DELAY, TimeUnit.MILLISECONDS)
+                .map(new Func1<String, NetworkResponse>() {
+                    @Override
+                    public NetworkResponse call(String s) {
+                        if (isNetworkAvailable()){
+
+                            if (RIGHT_CODE.equals(s)){
+                                return new NetworkResponse(CodeResponse.OK, TOKEN);
+                            } else {
+                                return new NetworkResponse(CodeResponse.WRONG_CODE, appContext.getString(R.string.wrong_code));
                             }
                         } else {
                             return new NetworkResponse(CodeResponse.NETWORK_ERROR, appContext.getString(R.string.network_error_description));

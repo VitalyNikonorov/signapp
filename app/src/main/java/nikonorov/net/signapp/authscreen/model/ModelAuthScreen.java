@@ -9,6 +9,7 @@ import rx.Observable;
 
 public interface ModelAuthScreen {
 
-    Observable<NetworkResponse> requestOnTimePass(AuthData data);
+    Observable<NetworkResponse> requestOneTimePass(AuthData data);
+    Observable<NetworkResponse> enterByCode(AuthData data);
 
 }
