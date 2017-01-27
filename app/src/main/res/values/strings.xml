@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">SignApp</string>
+    <string name="entering">Вход</string>
+    <string name="login_description_title">Войдите под вашим аккаунтом в школе Skyeng и получите доступ к мобильному личному кабинету.</string>
+    <string name="email">Электронная почта</string>
+    <string name="get_code">Получить код для входа</string>
+    <string name="pass_entering">Обычный вход с паролем</string>
+    <string name="login_tip">Сложный пароль или не хотите искать — войдите по коду. Или используйте обычный вход.</string>
+    <string name="sending_status">Отправка кода. \nПодождите…</string>
+    <string name="network_error_description">Не удалось подключиться. Проверьте интернет-соединение.</string>
+    <string name="wrong_email">Неверный адрес электронной почты</string>
+    <string name="type_code_phone">Введите код (отправлен на телефон %s)</string>
+    <string name="type_code_email">Введите код (отправлен на почту %s)</string>
+    <string name="enter">Войти</string>
+    <string name="resend_code">Выслать код повторно (%d с)</string>
+    <string name="code">Код</string>
+    <string name="enter_code">Введите код</string>
+    <string name="entering_description">Выполняется вход.\nПодождите…</string>
+    <string name="wrong_code">Неверный код</string>
+    <string name="pass">Пароль</string>
+    <string name="wrong_email_or_pass">Неверный адрес электронной почты или пароль</string>
 </resources>
