@@ -6,6 +6,7 @@ import nikonorov.net.signapp.data.DataSource;
 import nikonorov.net.signapp.di.AppComponent;
 import nikonorov.net.signapp.di.AppModule;
 import nikonorov.net.signapp.di.DaggerAppComponent;
+import nikonorov.net.signapp.network.NetworkMock;
 
 /**
  * Created by vitaly on 27.01.17.
@@ -25,7 +26,7 @@ public class App extends Application {
         return DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .dataSource(new DataSource())
+                .networkMock(new NetworkMock())
                 .build();
     }
-
 }
