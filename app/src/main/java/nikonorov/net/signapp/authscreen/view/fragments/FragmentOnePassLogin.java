@@ -13,7 +13,7 @@ import nikonorov.net.signapp.R;
  * Created by vitaly on 27.01.17.
  */
 
-public class FragmentPermamentLogin extends Fragment {
+public class FragmentOnePassLogin extends Fragment {
 
     @Nullable
     @Override
