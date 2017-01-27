@@ -9,6 +9,6 @@ import rx.Observable;
 
 public interface ModelAuthScreen {
 
-    Observable<NetworkResponse> requestOnTimePass(String email);
+    Observable<NetworkResponse> requestOnTimePass(AuthData data);
 
 }

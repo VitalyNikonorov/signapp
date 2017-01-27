@@ -11,6 +11,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import nikonorov.net.signapp.R;
+import nikonorov.net.signapp.authscreen.model.AuthData;
 import nikonorov.net.signapp.utils.Logger;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -48,9 +49,9 @@ public class NetworkMock implements NetworkManager {
     }
 
     @Override
-    public Observable<NetworkResponse> requestOnTimePass(String email) {
+    public Observable<NetworkResponse> requestOnTimePass(AuthData data) {
 
-        return Observable.just(email)
+        return Observable.just(data.login)
                 .delay(DELAY, TimeUnit.MILLISECONDS)
                 .map(new Func1<String, NetworkResponse>() {
                     @Override

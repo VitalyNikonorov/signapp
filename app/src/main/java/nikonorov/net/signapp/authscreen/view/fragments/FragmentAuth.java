@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import nikonorov.net.signapp.R;
+import nikonorov.net.signapp.authscreen.model.AuthData;
 import nikonorov.net.signapp.authscreen.view.AuthActivity;
 
 /**
@@ -61,6 +62,15 @@ public class FragmentAuth extends Fragment {
         loginTip = (TextView) view.findViewById(R.id.login_tip_tv);
 
         return view;
+    }
+
+    public AuthData getAuthData(){
+        String login = loginField.getText().toString();
+        String pass = null;
+        if (passField.getVisibility() == View.VISIBLE){
+            pass = passField.getText().toString();
+        }
+        return new AuthData(login, pass);
     }
 
     private void initView() {

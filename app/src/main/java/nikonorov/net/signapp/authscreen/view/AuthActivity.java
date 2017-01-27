@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import nikonorov.net.signapp.R;
+import nikonorov.net.signapp.authscreen.model.AuthData;
 import nikonorov.net.signapp.authscreen.presenter.PresenterAuthScreen;
 import nikonorov.net.signapp.authscreen.presenter.PresenterAuthScreenImpl;
 import nikonorov.net.signapp.authscreen.view.fragments.FragmentAuth;
@@ -77,6 +78,11 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
     @Override
     public void hidePreloader() {
         preloaderDialog.hide();
+    }
+
+    @Override
+    public AuthData getAuthData(FragmentType type) {
+        return fragments[type.id].getAuthData();
     }
 
     public void onFragmentRestored(FragmentType type){

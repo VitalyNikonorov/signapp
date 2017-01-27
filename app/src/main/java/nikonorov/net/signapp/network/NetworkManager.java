@@ -1,5 +1,6 @@
 package nikonorov.net.signapp.network;
 
+import nikonorov.net.signapp.authscreen.model.AuthData;
 import rx.Observable;
 
 /**
@@ -9,6 +10,6 @@ import rx.Observable;
 
 public interface NetworkManager {
 
-    Observable<NetworkResponse> requestOnTimePass(String email);
+    Observable<NetworkResponse> requestOnTimePass(AuthData data);
 
 }

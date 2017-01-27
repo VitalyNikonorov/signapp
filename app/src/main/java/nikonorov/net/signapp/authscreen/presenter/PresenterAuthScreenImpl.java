@@ -1,5 +1,6 @@
 package nikonorov.net.signapp.authscreen.presenter;
 
+import nikonorov.net.signapp.authscreen.model.AuthData;
 import nikonorov.net.signapp.authscreen.model.ModelAuthScreen;
 import nikonorov.net.signapp.authscreen.model.ModelAuthScreenImpl;
 import nikonorov.net.signapp.authscreen.view.ViewAuthScreen;
@@ -49,8 +50,9 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
         switch (currentFragment){
             case ONE_PASS_FRAGMENT:{
                 view.showPreloader();
+                AuthData data = view.getAuthData(currentFragment);
 
-                Subscription subscription = model.requestOnTimePass("").subscribe(new Observer<NetworkResponse>() {
+                Subscription subscription = model.requestOnTimePass(data).subscribe(new Observer<NetworkResponse>() {
                     @Override
                     public void onCompleted() {
                         view.hidePreloader();
@@ -67,6 +69,7 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                         view.hidePreloader();
                         switch (networkResponse.code){
                             case OK: {
+                                view.setFragment(FragmentType.ENTER_ONE_PASS_FRAGMENT, true);
                                 break;
                             }
                             case NETWORK_ERROR:

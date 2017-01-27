@@ -1,5 +1,6 @@
 package nikonorov.net.signapp.authscreen.presenter;
 
+import nikonorov.net.signapp.authscreen.model.AuthData;
 import nikonorov.net.signapp.authscreen.view.fragments.FragmentType;
 
 /**
