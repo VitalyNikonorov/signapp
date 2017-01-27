@@ -74,6 +74,10 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
                 .show();
     }
 
+    public void onFragmentRestored(FragmentType type){
+        presenter.onFragmentRestored(type);
+    }
+
     @Override
     public void onClick(View view) {
         String tag = view.getTag().toString();

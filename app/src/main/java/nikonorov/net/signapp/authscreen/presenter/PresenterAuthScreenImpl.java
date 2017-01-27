@@ -22,15 +22,19 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
 
     @Override
     public void onStart() {
-        view.setFragment(FragmentType.ONE_PASS_FRAGMENT, false);
-        currentFragment = FragmentType.ONE_PASS_FRAGMENT;
+        changeFragment(FragmentType.ONE_PASS_FRAGMENT, false);
+    }
+
+    private void changeFragment(FragmentType type, boolean needAddToStack){
+        view.setFragment(type, needAddToStack);
+        currentFragment = type;
     }
 
     @Override
     public void onMainActionBtnClick() {
         switch (currentFragment){
             case ONE_PASS_FRAGMENT:{
-                view.setFragment(FragmentType.ENTER_ONE_PASS_FRAGMENT, true);
+                changeFragment(FragmentType.ENTER_ONE_PASS_FRAGMENT, true);
                 break;
             }
             case ENTER_ONE_PASS_FRAGMENT: {
@@ -47,18 +51,23 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
     @Override
     public void onAdditionalBtnClick() {
         switch (currentFragment){
-            case ONE_PASS_FRAGMENT:{
-                view.setFragment(FragmentType.REGULAR_PASS_FRAGMENT, true);
+            case ONE_PASS_FRAGMENT: {
+                changeFragment(FragmentType.REGULAR_PASS_FRAGMENT, true);
                 break;
             }
             case ENTER_ONE_PASS_FRAGMENT: {
-                view.setFragment(FragmentType.REGULAR_PASS_FRAGMENT, true);
+                changeFragment(FragmentType.REGULAR_PASS_FRAGMENT, true);
                 break;
             }
             case REGULAR_PASS_FRAGMENT: {
-                view.setFragment(FragmentType.REGULAR_PASS_FRAGMENT, true);
+                changeFragment(FragmentType.ONE_PASS_FRAGMENT, true);
                 break;
             }
         }
+    }
+
+    @Override
+    public void onFragmentRestored(FragmentType type) {
+        currentFragment = type;
     }
 }

@@ -37,6 +37,12 @@ public class FragmentAuth extends Fragment {
         initView();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((AuthActivity)getActivity()).onFragmentRestored(type);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
