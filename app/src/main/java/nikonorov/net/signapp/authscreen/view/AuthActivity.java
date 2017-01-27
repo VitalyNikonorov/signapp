@@ -1,7 +1,6 @@
 package nikonorov.net.signapp.authscreen.view;
 
 import android.app.Dialog;
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -11,6 +10,7 @@ import android.view.View;
 import nikonorov.net.signapp.R;
 import nikonorov.net.signapp.authscreen.presenter.PresenterAuthScreen;
 import nikonorov.net.signapp.authscreen.presenter.PresenterAuthScreenImpl;
+import nikonorov.net.signapp.authscreen.view.fragments.AuthFragment;
 import nikonorov.net.signapp.authscreen.view.fragments.FragmentOnePassLogin;
 import nikonorov.net.signapp.authscreen.view.fragments.FragmentType;
 
@@ -21,7 +21,7 @@ import nikonorov.net.signapp.authscreen.view.fragments.FragmentType;
 public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, View.OnClickListener {
 
     private View authScreenContainer;
-    private Fragment[] fragments = new Fragment[1];
+    private AuthFragment[] fragments = new AuthFragment[FragmentType.values().length];
     private PresenterAuthScreen presenter;
     private Dialog preloaderDialog;
 
@@ -32,7 +32,11 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
         presenter = new PresenterAuthScreenImpl(this);
         authScreenContainer = findViewById(R.id.auth_screen_container);
 
-        fragments[0] = new FragmentOnePassLogin();
+        fragments[FragmentType.ONE_PASS_FRAGMENT.id] = new FragmentOnePassLogin();
+        fragments[FragmentType.ONE_PASS_FRAGMENT.id].setType(FragmentType.ONE_PASS_FRAGMENT);
+        fragments[FragmentType.ENTER_ONE_PASS_FRAGMENT.id] = new FragmentOnePassLogin();
+        fragments[FragmentType.ENTER_ONE_PASS_FRAGMENT.id].setType(FragmentType.ENTER_ONE_PASS_FRAGMENT);
+
         initProgressDialog();
     }
 
@@ -46,6 +50,7 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
     public void setFragment(FragmentType fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.auth_screen_container, fragments[fragment.id]);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 

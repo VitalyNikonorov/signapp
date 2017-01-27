@@ -28,7 +28,16 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
 
     @Override
     public void onMainActionBtnClick() {
-        view.showPreloader();
+        switch (currentFragment){
+            case ONE_PASS_FRAGMENT:{
+                view.setFragment(FragmentType.ENTER_ONE_PASS_FRAGMENT);
+                break;
+            }
+            case ENTER_ONE_PASS_FRAGMENT: {
+
+                break;
+            }
+        }
     }
 
     @Override

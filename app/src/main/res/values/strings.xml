@@ -12,13 +12,14 @@
     <string name="type_code_phone">Введите код (отправлен на телефон %s)</string>
     <string name="type_code_email">Введите код (отправлен на почту %s)</string>
     <string name="enter">Войти</string>
-    <string name="resend_code">Выслать код повторно (%d с)</string>
+    <string name="resend_code">Выслать код повторно %s</string>
     <string name="code">Код</string>
     <string name="enter_code">Введите код</string>
     <string name="entering_description">Выполняется вход.\nПодождите…</string>
     <string name="wrong_code">Неверный код</string>
     <string name="pass">Пароль</string>
     <string name="wrong_email_or_pass">Неверный адрес электронной почты или пароль</string>
+    <string name="empty"></string>
 
     <string name="tag_main_btn">Main Button</string>
     <string name="tag_additional_btn">Additional Button</string>
