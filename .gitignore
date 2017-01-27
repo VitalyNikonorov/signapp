@@ -6,7 +6,7 @@
 .DS_Store
 /captures
 .externalNativeBuild
-/*/build/
+/build/
 
 .idea/tasks.xml
 .idea/.name
