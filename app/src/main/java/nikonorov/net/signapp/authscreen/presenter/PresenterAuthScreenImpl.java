@@ -13,6 +13,7 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
 
     private ViewAuthScreen view;
     private ModelAuthScreen model;
+    private FragmentType currentFragment;
 
     public PresenterAuthScreenImpl(ViewAuthScreen view) {
         this.view = view;
@@ -22,5 +23,6 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
     @Override
     public void onStart() {
         view.setFragment(FragmentType.ONE_PASS_FRAGMENT);
+        currentFragment = FragmentType.ONE_PASS_FRAGMENT;
     }
 }
