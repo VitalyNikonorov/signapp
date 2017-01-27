@@ -20,6 +20,7 @@ public class FragmentOnePassLogin extends AuthFragment {
 
     private TextView description;
     private EditText loginField;
+    private EditText passField;
     private TextView additionalBtn;
     private TextView loginTip;
     private Button mainActionBtn;
@@ -34,6 +35,7 @@ public class FragmentOnePassLogin extends AuthFragment {
 
         description = (TextView) view.findViewById(R.id.login_description);
         loginField = (EditText) view.findViewById(R.id.login_login_field);
+        passField = (EditText) view.findViewById(R.id.login_pass_field);
         additionalBtn = (TextView) view.findViewById(R.id.additional_btn);
         loginTip = (TextView) view.findViewById(R.id.login_tip_tv);
 
@@ -44,6 +46,14 @@ public class FragmentOnePassLogin extends AuthFragment {
     protected void initView() {
         description.setText(type.description);
         loginField.setHint(type.fieldHints[0]);
+
+        if (type.fieldHints.length == 1){
+            passField.setVisibility(View.GONE);
+        } else {
+            passField.setVisibility(View.VISIBLE);
+            passField.setHint(type.fieldHints[1]);
+        }
+
         mainActionBtn.setText(type.mainBtnCaption);
         additionalBtn.setText(type.additionalBtnCaption);
         loginTip.setText(type.tip);

@@ -12,7 +12,7 @@
     <string name="type_code_phone">Введите код (отправлен на телефон %s)</string>
     <string name="type_code_email">Введите код (отправлен на почту %s)</string>
     <string name="enter">Войти</string>
-    <string name="resend_code">Выслать код повторно %s</string>
+    <string name="resend_code">Выслать код повторно%s</string>
     <string name="code">Код</string>
     <string name="enter_code">Введите код</string>
     <string name="entering_description">Выполняется вход.\nПодождите…</string>
