@@ -11,5 +11,6 @@ public interface ViewAuthScreen {
     void setFragment(FragmentType type, boolean needAddToStack);
     void showPreloader();
     void showErrorMessage(String message);
+    void hidePreloader();
 
 }

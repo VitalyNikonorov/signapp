@@ -4,6 +4,11 @@ import nikonorov.net.signapp.authscreen.model.ModelAuthScreen;
 import nikonorov.net.signapp.authscreen.model.ModelAuthScreenImpl;
 import nikonorov.net.signapp.authscreen.view.ViewAuthScreen;
 import nikonorov.net.signapp.authscreen.view.fragments.FragmentType;
+import nikonorov.net.signapp.network.NetworkResponse;
+import nikonorov.net.signapp.utils.Logger;
+import rx.Observer;
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by vitaly on 27.01.17.
@@ -15,14 +20,23 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
     private ModelAuthScreen model;
     private FragmentType currentFragment;
 
+    private CompositeSubscription subscriptions = new CompositeSubscription();
+
     public PresenterAuthScreenImpl(ViewAuthScreen view) {
         this.view = view;
         model = new ModelAuthScreenImpl(this);
     }
 
+
+
     @Override
     public void onStart() {
         changeFragment(FragmentType.ONE_PASS_FRAGMENT, false);
+    }
+
+    @Override
+    public void onStop() {
+        subscriptions.unsubscribe();
     }
 
     private void changeFragment(FragmentType type, boolean needAddToStack){
@@ -34,7 +48,36 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
     public void onMainActionBtnClick() {
         switch (currentFragment){
             case ONE_PASS_FRAGMENT:{
-                changeFragment(FragmentType.ENTER_ONE_PASS_FRAGMENT, true);
+                view.showPreloader();
+
+                Subscription subscription = model.requestOnTimePass("").subscribe(new Observer<NetworkResponse>() {
+                    @Override
+                    public void onCompleted() {
+                        view.hidePreloader();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.hidePreloader();
+                        Logger.e(PresenterAuthScreen.class.getName(), e);
+                    }
+
+                    @Override
+                    public void onNext(NetworkResponse networkResponse) {
+                        view.hidePreloader();
+                        switch (networkResponse.code){
+                            case OK: {
+
+                                break;
+                            }
+                            case NETWORK_ERROR:{
+                                view.showErrorMessage(networkResponse.msg);
+                            }
+                        }
+                    }
+                });
+
+                subscriptions.add(subscription);
                 break;
             }
             case ENTER_ONE_PASS_FRAGMENT: {

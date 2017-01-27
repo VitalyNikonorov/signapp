@@ -16,4 +16,10 @@ public class Logger {
         }
     }
 
+    public static void e(String classFrom, Throwable e){
+        if (isLoggingNeed){
+            e.printStackTrace();
+        }
+    }
+
 }

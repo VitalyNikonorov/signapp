@@ -74,6 +74,11 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
                 .show();
     }
 
+    @Override
+    public void hidePreloader() {
+        preloaderDialog.hide();
+    }
+
     public void onFragmentRestored(FragmentType type){
         presenter.onFragmentRestored(type);
     }

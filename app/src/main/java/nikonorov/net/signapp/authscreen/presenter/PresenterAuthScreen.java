@@ -9,6 +9,7 @@ import nikonorov.net.signapp.authscreen.view.fragments.FragmentType;
 public interface PresenterAuthScreen {
 
     void onStart();
+    void onStop();
     void onMainActionBtnClick();
     void onAdditionalBtnClick();
     void onFragmentRestored(FragmentType type);
