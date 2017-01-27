@@ -13,6 +13,11 @@
         android:hint="@string/email"
         style="@style/LoginLoginField"/>
 
+    <EditText
+        android:id="@+id/login_pass_field"
+        android:hint="@string/pass"
+        style="@style/LoginLoginField"/>
+
     <Button
         android:id="@+id/login_action_btn"
         android:text="@string/get_code"
