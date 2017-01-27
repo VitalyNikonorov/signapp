@@ -5,6 +5,7 @@
     <string name="email">Электронная почта</string>
     <string name="get_code">Получить код для входа</string>
     <string name="pass_entering">Обычный вход с паролем</string>
+    <string name="without_pass_entering">Войти без пароля</string>
     <string name="login_tip">Сложный пароль или не хотите искать — войдите по коду. Или используйте обычный вход.</string>
     <string name="sending_status">Отправка кода. \nПодождите…</string>
     <string name="network_error_description">Не удалось подключиться. Проверьте интернет-соединение.</string>

@@ -36,6 +36,8 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
         fragments[FragmentType.ONE_PASS_FRAGMENT.id].setType(FragmentType.ONE_PASS_FRAGMENT);
         fragments[FragmentType.ENTER_ONE_PASS_FRAGMENT.id] = new FragmentOnePassLogin();
         fragments[FragmentType.ENTER_ONE_PASS_FRAGMENT.id].setType(FragmentType.ENTER_ONE_PASS_FRAGMENT);
+        fragments[FragmentType.REGULAR_PASS_FRAGMENT.id] = new FragmentOnePassLogin();
+        fragments[FragmentType.REGULAR_PASS_FRAGMENT.id].setType(FragmentType.ENTER_ONE_PASS_FRAGMENT);
 
         initProgressDialog();
     }

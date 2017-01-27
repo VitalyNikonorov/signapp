@@ -23,7 +23,16 @@ public enum FragmentType {
             new int[] {R.string.code},
             R.string.enter,
             R.string.resend_code,
-            R.string.empty);
+            R.string.empty),
+
+    REGULAR_PASS_FRAGMENT(
+            2,
+            R.string.entering,
+            R.string.login_description_title,
+            new int[] {R.string.email, R.string.pass},
+            R.string.enter,
+            R.string.without_pass_entering,
+            R.string.login_tip);
 
     public final int id;
     public final int title;
