@@ -47,10 +47,12 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
     }
 
     @Override
-    public void setFragment(FragmentType fragment) {
+    public void setFragment(FragmentType fragment, boolean needAddToStack) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.auth_screen_container, fragments[fragment.id]);
-        transaction.addToBackStack(null);
+        if (needAddToStack) {
+            transaction.addToBackStack(null);
+        }
         transaction.commit();
     }
 

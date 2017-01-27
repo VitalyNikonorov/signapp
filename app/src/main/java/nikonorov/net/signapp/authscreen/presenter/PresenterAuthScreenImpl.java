@@ -22,7 +22,7 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
 
     @Override
     public void onStart() {
-        view.setFragment(FragmentType.ONE_PASS_FRAGMENT);
+        view.setFragment(FragmentType.ONE_PASS_FRAGMENT, false);
         currentFragment = FragmentType.ONE_PASS_FRAGMENT;
     }
 
@@ -30,7 +30,7 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
     public void onMainActionBtnClick() {
         switch (currentFragment){
             case ONE_PASS_FRAGMENT:{
-                view.setFragment(FragmentType.ENTER_ONE_PASS_FRAGMENT);
+                view.setFragment(FragmentType.ENTER_ONE_PASS_FRAGMENT, true);
                 break;
             }
             case ENTER_ONE_PASS_FRAGMENT: {
