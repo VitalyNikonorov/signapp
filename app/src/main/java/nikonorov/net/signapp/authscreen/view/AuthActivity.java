@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -57,6 +58,12 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
     @Override
     public void showPreloader() {
         preloaderDialog.show();
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+        Snackbar.make(authScreenContainer, message, Snackbar.LENGTH_LONG)
+                .show();
     }
 
     @Override

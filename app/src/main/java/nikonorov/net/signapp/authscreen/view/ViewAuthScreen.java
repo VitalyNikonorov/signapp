@@ -10,5 +10,6 @@ public interface ViewAuthScreen {
 
     void setFragment(FragmentType type);
     void showPreloader();
+    void showErrorMessage(String message);
 
 }
