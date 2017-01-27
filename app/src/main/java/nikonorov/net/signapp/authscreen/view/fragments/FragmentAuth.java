@@ -1,5 +1,6 @@
 package nikonorov.net.signapp.authscreen.view.fragments;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -16,7 +17,7 @@ import nikonorov.net.signapp.authscreen.view.AuthActivity;
  * Created by vitaly on 27.01.17.
  */
 
-public class FragmentOnePassLogin extends AuthFragment {
+public class FragmentAuth extends Fragment {
 
     private TextView description;
     private EditText loginField;
@@ -24,6 +25,17 @@ public class FragmentOnePassLogin extends AuthFragment {
     private TextView additionalBtn;
     private TextView loginTip;
     private Button mainActionBtn;
+
+    private FragmentType type;
+
+    public void setType(FragmentType type) {
+        this.type = type;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        initView();
+    }
 
     @Nullable
     @Override
@@ -42,8 +54,7 @@ public class FragmentOnePassLogin extends AuthFragment {
         return view;
     }
 
-    @Override
-    protected void initView() {
+    private void initView() {
         description.setText(type.description);
         loginField.setHint(type.fieldHints[0]);
 

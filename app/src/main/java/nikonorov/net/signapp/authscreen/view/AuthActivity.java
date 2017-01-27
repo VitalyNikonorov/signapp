@@ -10,8 +10,7 @@ import android.view.View;
 import nikonorov.net.signapp.R;
 import nikonorov.net.signapp.authscreen.presenter.PresenterAuthScreen;
 import nikonorov.net.signapp.authscreen.presenter.PresenterAuthScreenImpl;
-import nikonorov.net.signapp.authscreen.view.fragments.AuthFragment;
-import nikonorov.net.signapp.authscreen.view.fragments.FragmentOnePassLogin;
+import nikonorov.net.signapp.authscreen.view.fragments.FragmentAuth;
 import nikonorov.net.signapp.authscreen.view.fragments.FragmentType;
 
 /**
@@ -21,7 +20,7 @@ import nikonorov.net.signapp.authscreen.view.fragments.FragmentType;
 public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, View.OnClickListener {
 
     private View authScreenContainer;
-    private AuthFragment[] fragments = new AuthFragment[FragmentType.values().length];
+    private FragmentAuth[] fragments = new FragmentAuth[FragmentType.values().length];
     private PresenterAuthScreen presenter;
     private Dialog preloaderDialog;
 
@@ -32,11 +31,11 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
         presenter = new PresenterAuthScreenImpl(this);
         authScreenContainer = findViewById(R.id.auth_screen_container);
 
-        fragments[FragmentType.ONE_PASS_FRAGMENT.id] = new FragmentOnePassLogin();
+        fragments[FragmentType.ONE_PASS_FRAGMENT.id] = new FragmentAuth();
         fragments[FragmentType.ONE_PASS_FRAGMENT.id].setType(FragmentType.ONE_PASS_FRAGMENT);
-        fragments[FragmentType.ENTER_ONE_PASS_FRAGMENT.id] = new FragmentOnePassLogin();
+        fragments[FragmentType.ENTER_ONE_PASS_FRAGMENT.id] = new FragmentAuth();
         fragments[FragmentType.ENTER_ONE_PASS_FRAGMENT.id].setType(FragmentType.ENTER_ONE_PASS_FRAGMENT);
-        fragments[FragmentType.REGULAR_PASS_FRAGMENT.id] = new FragmentOnePassLogin();
+        fragments[FragmentType.REGULAR_PASS_FRAGMENT.id] = new FragmentAuth();
         fragments[FragmentType.REGULAR_PASS_FRAGMENT.id].setType(FragmentType.ENTER_ONE_PASS_FRAGMENT);
 
         initProgressDialog();
