@@ -37,11 +37,28 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
 
                 break;
             }
+            case REGULAR_PASS_FRAGMENT: {
+
+                break;
+            }
         }
     }
 
     @Override
     public void onAdditionalBtnClick() {
-        view.showPreloader();
+        switch (currentFragment){
+            case ONE_PASS_FRAGMENT:{
+                view.setFragment(FragmentType.REGULAR_PASS_FRAGMENT, true);
+                break;
+            }
+            case ENTER_ONE_PASS_FRAGMENT: {
+                view.setFragment(FragmentType.REGULAR_PASS_FRAGMENT, true);
+                break;
+            }
+            case REGULAR_PASS_FRAGMENT: {
+                view.setFragment(FragmentType.REGULAR_PASS_FRAGMENT, true);
+                break;
+            }
+        }
     }
 }

@@ -45,10 +45,13 @@ public class FragmentAuth extends Fragment {
         mainActionBtn.setTag(getResources().getString(R.string.tag_main_btn));
         mainActionBtn.setOnClickListener((AuthActivity)getActivity());
 
+        additionalBtn = (TextView) view.findViewById(R.id.additional_btn);
+        additionalBtn.setTag(getResources().getString(R.string.tag_additional_btn));
+        additionalBtn.setOnClickListener((AuthActivity) getActivity());
+
         description = (TextView) view.findViewById(R.id.login_description);
         loginField = (EditText) view.findViewById(R.id.login_login_field);
         passField = (EditText) view.findViewById(R.id.login_pass_field);
-        additionalBtn = (TextView) view.findViewById(R.id.additional_btn);
         loginTip = (TextView) view.findViewById(R.id.login_tip_tv);
 
         return view;
