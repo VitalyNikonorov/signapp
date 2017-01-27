@@ -7,5 +7,7 @@ package nikonorov.net.signapp.authscreen.presenter;
 public interface PresenterAuthScreen {
 
     void onStart();
+    void onMainActionBtnClick();
+    void onAdditionalBtnClick();
 
 }

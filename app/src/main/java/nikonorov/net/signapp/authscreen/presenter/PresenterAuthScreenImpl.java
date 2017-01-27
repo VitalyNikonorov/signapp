@@ -25,4 +25,14 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
         view.setFragment(FragmentType.ONE_PASS_FRAGMENT);
         currentFragment = FragmentType.ONE_PASS_FRAGMENT;
     }
+
+    @Override
+    public void onMainActionBtnClick() {
+        view.showPreloader();
+    }
+
+    @Override
+    public void onAdditionalBtnClick() {
+        view.showPreloader();
+    }
 }

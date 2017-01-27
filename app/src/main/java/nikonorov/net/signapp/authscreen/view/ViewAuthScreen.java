@@ -9,5 +9,6 @@ import nikonorov.net.signapp.authscreen.view.fragments.FragmentType;
 public interface ViewAuthScreen {
 
     void setFragment(FragmentType type);
+    void showPreloader();
 
 }
