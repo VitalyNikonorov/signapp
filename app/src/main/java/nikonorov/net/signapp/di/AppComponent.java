@@ -16,5 +16,5 @@ import nikonorov.net.signapp.network.NetworkMock;
 public interface AppComponent {
 
     void inject(ModelAuthScreenImpl modelAuthScreen);
-
+    void inject(NetworkMock networkMock);
 }
