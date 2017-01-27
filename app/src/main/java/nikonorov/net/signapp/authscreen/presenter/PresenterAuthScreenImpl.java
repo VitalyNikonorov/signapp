@@ -67,11 +67,12 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                         view.hidePreloader();
                         switch (networkResponse.code){
                             case OK: {
-
                                 break;
                             }
-                            case NETWORK_ERROR:{
+                            case NETWORK_ERROR:
+                            case WRONG_EMAIL:{
                                 view.showErrorMessage(networkResponse.msg);
+                                break;
                             }
                         }
                     }

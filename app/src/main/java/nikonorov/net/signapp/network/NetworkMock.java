@@ -23,6 +23,7 @@ import rx.schedulers.Schedulers;
 @Module
 public class NetworkMock implements NetworkManager {
     private final long DELAY = 1500l;
+    private final String RIGHT_EMAIL = "1@1.com";
 
     public NetworkMock() {
     }
@@ -55,9 +56,14 @@ public class NetworkMock implements NetworkManager {
                     @Override
                     public NetworkResponse call(String s) {
                         if (isNetworkAvailable()){
-                            return null;
+
+                            if (RIGHT_EMAIL.equals(s)){
+                                return new NetworkResponse(CodeResponse.OK, s);
+                            } else {
+                                return new NetworkResponse(CodeResponse.WRONG_EMAIL, appContext.getString(R.string.wrong_email));
+                            }
                         } else {
-                            return new NetworkResponse(CodeResponse.NETWORK_ERROR, appContext.getResources().getString(R.string.network_error_description));
+                            return new NetworkResponse(CodeResponse.NETWORK_ERROR, appContext.getString(R.string.network_error_description));
                         }
                     }
                 })

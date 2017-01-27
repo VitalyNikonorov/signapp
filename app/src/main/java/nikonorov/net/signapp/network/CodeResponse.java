@@ -7,5 +7,6 @@ package nikonorov.net.signapp.network;
 public enum CodeResponse {
 
     OK,
+    WRONG_EMAIL,
     NETWORK_ERROR;
 }
