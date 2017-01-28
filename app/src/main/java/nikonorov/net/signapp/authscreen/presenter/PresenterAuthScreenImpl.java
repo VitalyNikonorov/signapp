@@ -1,5 +1,7 @@
 package nikonorov.net.signapp.authscreen.presenter;
 
+import android.support.annotation.NonNull;
+
 import nikonorov.net.signapp.R;
 import nikonorov.net.signapp.authscreen.model.AuthData;
 import nikonorov.net.signapp.authscreen.model.ModelAuthScreen;
@@ -8,9 +10,11 @@ import nikonorov.net.signapp.authscreen.view.ViewAuthScreen;
 import nikonorov.net.signapp.authscreen.view.fragments.FragmentType;
 import nikonorov.net.signapp.network.entity.NetworkResponse;
 import nikonorov.net.signapp.utils.Logger;
+import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 /**
  * Created by vitaly on 27.01.17.
@@ -21,6 +25,9 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
     private ViewAuthScreen view;
     private ModelAuthScreen model;
     private FragmentType currentFragment;
+    private Subscription onTimePassSubscription = Subscriptions.empty();
+    private Subscription enterByCodeSubscription = Subscriptions.empty();
+    private Subscription enterByRegularPassSubscription = Subscriptions.empty();
 
     private CompositeSubscription subscriptions = new CompositeSubscription();
 
@@ -37,6 +44,7 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
     @Override
     public void onStop() {
         subscriptions.unsubscribe();
+        view.hidePreloader();
     }
 
     private void changeFragment(FragmentType type, boolean needAddToStack){
@@ -51,7 +59,9 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                 view.showPreloader(currentFragment.preloaderMsg);
                 AuthData data = view.getAuthData(currentFragment);
 
-                Subscription subscription = model.requestOneTimePass(data).subscribe(new Observer<NetworkResponse>() {
+                prepareSubscription(onTimePassSubscription);
+
+                onTimePassSubscription = model.requestOneTimePass(data).subscribe(new Observer<NetworkResponse>() {
                     @Override
                     public void onCompleted() {
                         view.hidePreloader();
@@ -81,7 +91,7 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                     }
                 });
 
-                subscriptions.add(subscription);
+                subscriptions.add(onTimePassSubscription);
                 break;
             }
             case ENTER_ONE_PASS_FRAGMENT: {
@@ -89,7 +99,9 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                 view.showPreloader(currentFragment.preloaderMsg);
                 AuthData data = view.getAuthData(currentFragment);
 
-                Subscription subscription = model.enterByCode(data).subscribe(new Observer<NetworkResponse>() {
+                prepareSubscription(enterByCodeSubscription);
+
+                enterByCodeSubscription = model.enterByCode(data).subscribe(new Observer<NetworkResponse>() {
                     @Override
                     public void onCompleted() {
                         view.hidePreloader();
@@ -117,14 +129,17 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                         }
                     }
                 });
-                subscriptions.add(subscription);
+                subscriptions.add(enterByCodeSubscription);
                 break;
             }
+
             case REGULAR_PASS_FRAGMENT: {
                 view.showPreloader(currentFragment.preloaderMsg);
                 AuthData data = view.getAuthData(currentFragment);
 
-                Subscription subscription = model.enterByRegularPass(data).subscribe(new Observer<NetworkResponse>() {
+                prepareSubscription(enterByRegularPassSubscription);
+
+                enterByRegularPassSubscription = model.enterByRegularPass(data).subscribe(new Observer<NetworkResponse>() {
                     @Override
                     public void onCompleted() {
                         view.hidePreloader();
@@ -152,9 +167,15 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                         }
                     }
                 });
-                subscriptions.add(subscription);
+                subscriptions.add(enterByRegularPassSubscription);
                 break;
             }
+        }
+    }
+
+    private void prepareSubscription(@NonNull Subscription subscription){
+        if (!subscription.isUnsubscribed()){
+            subscription.unsubscribe();
         }
     }
 
