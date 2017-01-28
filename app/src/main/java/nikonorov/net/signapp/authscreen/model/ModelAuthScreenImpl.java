@@ -6,7 +6,7 @@ import nikonorov.net.signapp.App;
 import nikonorov.net.signapp.authscreen.presenter.PresenterAuthScreen;
 import nikonorov.net.signapp.data.DataSource;
 import nikonorov.net.signapp.network.NetworkManager;
-import nikonorov.net.signapp.network.NetworkResponse;
+import nikonorov.net.signapp.network.entity.NetworkResponse;
 import rx.Observable;
 
 /**
@@ -35,5 +35,10 @@ public class ModelAuthScreenImpl implements ModelAuthScreen {
     @Override
     public Observable<NetworkResponse> enterByCode(AuthData data) {
         return networkManager.enterByCode(data);
+    }
+
+    @Override
+    public Observable<NetworkResponse> enterByRegularPass(AuthData data) {
+        return networkManager.enterByRegularPass(data);
     }
 }

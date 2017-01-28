@@ -12,7 +12,8 @@ import dagger.Module;
 import dagger.Provides;
 import nikonorov.net.signapp.R;
 import nikonorov.net.signapp.authscreen.model.AuthData;
-import nikonorov.net.signapp.utils.Logger;
+import nikonorov.net.signapp.network.entity.CodeResponse;
+import nikonorov.net.signapp.network.entity.NetworkResponse;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -26,6 +27,7 @@ public class NetworkMock implements NetworkManager {
     private final long DELAY = 1500l;
     private final String RIGHT_PHONE_EMAIL = "1@1.com";
     private final String RIGHT_EMAIL = "a@a.com";
+    private final String RIGHT_PASS = "0000";
 
     private final String TOKEN = "00000";
 
@@ -33,6 +35,8 @@ public class NetworkMock implements NetworkManager {
 
     private final String PHONE = " телефон +7916*****89";
     private final String EMAIL = " почту a@a.com";
+
+
 
 
     public NetworkMock() {
@@ -96,6 +100,29 @@ public class NetworkMock implements NetworkManager {
                                 return new NetworkResponse(CodeResponse.OK, TOKEN);
                             } else {
                                 return new NetworkResponse(CodeResponse.WRONG_CODE, appContext.getString(R.string.wrong_code));
+                            }
+                        } else {
+                            return new NetworkResponse(CodeResponse.NETWORK_ERROR, appContext.getString(R.string.network_error_description));
+                        }
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public Observable<NetworkResponse> enterByRegularPass(AuthData data) {
+        return Observable.just(data)
+                .delay(DELAY, TimeUnit.MILLISECONDS)
+                .map(new Func1<AuthData, NetworkResponse>() {
+                    @Override
+                    public NetworkResponse call(AuthData data) {
+                        if (isNetworkAvailable()){
+
+                            if (RIGHT_PASS.equals(data.pass) && RIGHT_EMAIL.equals(data.login)){
+                                return new NetworkResponse(CodeResponse.OK, TOKEN);
+                            } else {
+                                return new NetworkResponse(CodeResponse.WRONG_EMAIL_OR_PASS, appContext.getString(R.string.wrong_email_or_pass));
                             }
                         } else {
                             return new NetworkResponse(CodeResponse.NETWORK_ERROR, appContext.getString(R.string.network_error_description));

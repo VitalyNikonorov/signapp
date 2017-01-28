@@ -1,6 +1,6 @@
 package nikonorov.net.signapp.authscreen.model;
 
-import nikonorov.net.signapp.network.NetworkResponse;
+import nikonorov.net.signapp.network.entity.NetworkResponse;
 import rx.Observable;
 
 /**
@@ -11,5 +11,6 @@ public interface ModelAuthScreen {
 
     Observable<NetworkResponse> requestOneTimePass(AuthData data);
     Observable<NetworkResponse> enterByCode(AuthData data);
+    Observable<NetworkResponse> enterByRegularPass(AuthData data);
 
 }

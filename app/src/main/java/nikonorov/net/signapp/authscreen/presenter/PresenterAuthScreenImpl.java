@@ -5,7 +5,7 @@ import nikonorov.net.signapp.authscreen.model.ModelAuthScreen;
 import nikonorov.net.signapp.authscreen.model.ModelAuthScreenImpl;
 import nikonorov.net.signapp.authscreen.view.ViewAuthScreen;
 import nikonorov.net.signapp.authscreen.view.fragments.FragmentType;
-import nikonorov.net.signapp.network.NetworkResponse;
+import nikonorov.net.signapp.network.entity.NetworkResponse;
 import nikonorov.net.signapp.utils.Logger;
 import rx.Observer;
 import rx.Subscription;
@@ -122,7 +122,38 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                 break;
             }
             case REGULAR_PASS_FRAGMENT: {
+                view.showPreloader(currentFragment.preloaderMsg);
+                AuthData data = view.getAuthData(currentFragment);
 
+                Subscription subscription = model.enterByRegularPass(data).subscribe(new Observer<NetworkResponse>() {
+                    @Override
+                    public void onCompleted() {
+                        view.hidePreloader();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.hidePreloader();
+                        Logger.e(PresenterAuthScreen.class.getName(), e);
+                    }
+
+                    @Override
+                    public void onNext(NetworkResponse networkResponse) {
+                        view.hidePreloader();
+                        switch (networkResponse.code){
+                            case OK: {
+                                view.onLoggedIn();
+                                break;
+                            }
+                            case NETWORK_ERROR:
+                            case WRONG_EMAIL_OR_PASS:{
+                                view.showErrorMessage(networkResponse.msg);
+                                break;
+                            }
+                        }
+                    }
+                });
+                subscriptions.add(subscription);
                 break;
             }
         }
