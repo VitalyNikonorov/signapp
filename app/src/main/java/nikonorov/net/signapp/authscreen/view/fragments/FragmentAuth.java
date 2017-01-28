@@ -146,6 +146,7 @@ public class FragmentAuth extends Fragment implements TextWatcher {
                 passField.setVisibility(View.GONE);
                 description.setText(getString(type.description, sendOn));
                 additionalBtn.setText(getString(R.string.resend_code, String.format(" %d с", DELAY_IN_SECONDS)));
+                additionalBtn.setEnabled(false);
                 description.setText(type.description);
 
                 prepareSubscription(subscription);

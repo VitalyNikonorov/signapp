@@ -34,7 +34,7 @@
     <style name="LoginAdditionalBtn" parent="LoginMargins">
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/additional_button</item>
         <item name="android:layout_marginTop">20dp</item>
     </style>
 
