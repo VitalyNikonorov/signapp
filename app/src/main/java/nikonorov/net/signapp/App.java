@@ -2,7 +2,7 @@ package nikonorov.net.signapp;
 
 import android.app.Application;
 
-import nikonorov.net.signapp.data.DataSource;
+import nikonorov.net.signapp.data.DataSourceImpl;
 import nikonorov.net.signapp.di.AppComponent;
 import nikonorov.net.signapp.di.AppModule;
 import nikonorov.net.signapp.di.DaggerAppComponent;
@@ -25,7 +25,7 @@ public class App extends Application {
     protected AppComponent buildComponent() {
         return DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
-                .dataSource(new DataSource())
+                .dataSource(new DataSourceImpl())
                 .networkMock(new NetworkMock())
                 .build();
     }

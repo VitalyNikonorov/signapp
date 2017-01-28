@@ -23,4 +23,7 @@
 
     <string name="tag_main_btn">Main Button</string>
     <string name="tag_additional_btn">Additional Button</string>
+
+    <string name="shared_token">net.nikonorov.token</string>
+    <string name="shared_file">net.nikonorov.sharedpreferences</string>
 </resources>

@@ -4,7 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import nikonorov.net.signapp.authscreen.model.ModelAuthScreenImpl;
-import nikonorov.net.signapp.data.DataSource;
+import nikonorov.net.signapp.data.DataSourceImpl;
 import nikonorov.net.signapp.network.NetworkMock;
 
 /**
@@ -12,7 +12,7 @@ import nikonorov.net.signapp.network.NetworkMock;
  */
 
 @Singleton
-@Component(modules = {AppModule.class, DataSource.class, NetworkMock.class})
+@Component(modules = {AppModule.class, DataSourceImpl.class, NetworkMock.class})
 public interface AppComponent {
 
     void inject(ModelAuthScreenImpl modelAuthScreen);

@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import nikonorov.net.signapp.App;
 import nikonorov.net.signapp.authscreen.presenter.PresenterAuthScreen;
-import nikonorov.net.signapp.data.DataSource;
+import nikonorov.net.signapp.data.DataSourceImpl;
 import nikonorov.net.signapp.network.NetworkManager;
 import nikonorov.net.signapp.network.entity.NetworkResponse;
 import nikonorov.net.signapp.utils.Logger;
@@ -19,7 +19,7 @@ public class ModelAuthScreenImpl implements ModelAuthScreen {
     private AuthData lastData = null;
     private PresenterAuthScreen presenter;
     @Inject
-    DataSource dataSource;
+    DataSourceImpl dataSourceImpl;
 
     @Inject
     NetworkManager networkManager;
