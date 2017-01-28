@@ -1,5 +1,8 @@
 package nikonorov.net.signapp.data;
 
+import android.content.Context;
+
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -12,12 +15,19 @@ import dagger.Provides;
 @Module
 public class DataSource {
 
+    private Context appContext;
+
     public DataSource() {
     }
 
+    public DataSource(Context appContext) {
+            this.appContext = appContext;
+    }
+
+
     @Provides
     @Singleton
-    public DataSource provideDataSource(){
-        return new DataSource();
+    public DataSource provideDataSource(Context appContext){
+        return new DataSource(appContext);
     }
 }
