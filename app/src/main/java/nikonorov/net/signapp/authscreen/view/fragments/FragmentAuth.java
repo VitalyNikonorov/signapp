@@ -35,7 +35,7 @@ import static nikonorov.net.signapp.utils.SubscriptionUtils.prepareSubscription;
 public class FragmentAuth extends Fragment implements TextWatcher {
 
     private static final int ONE_SECOND_MILLIS = 1000;
-    private static final int DELAY_IN_SECONDS = 1000;
+    private static final int DELAY_IN_SECONDS = 60;
 
     private TextView description;
     private EditText loginField;
