@@ -29,8 +29,6 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
         model = new ModelAuthScreenImpl(this);
     }
 
-
-
     @Override
     public void onStart() {
         changeFragment(FragmentType.ONE_PASS_FRAGMENT, false);

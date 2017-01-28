@@ -33,8 +33,6 @@ public class DataSourceImpl implements DataSource {
         return new DataSourceImpl(appContext);
     }
 
-
-
     @Override
     public void saveToken(String token) {
         sharedPreferences = appContext.getSharedPreferences(appContext.getString(R.string.shared_file), Context.MODE_PRIVATE);
@@ -42,8 +40,6 @@ public class DataSourceImpl implements DataSource {
         editor.putString(appContext.getString(R.string.shared_token), token);
         editor.commit();
     }
-
-
 
     @Override
     @Nullable
