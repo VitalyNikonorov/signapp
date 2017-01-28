@@ -1,5 +1,6 @@
 package nikonorov.net.signapp.authscreen.presenter;
 
+import nikonorov.net.signapp.R;
 import nikonorov.net.signapp.authscreen.model.AuthData;
 import nikonorov.net.signapp.authscreen.model.ModelAuthScreen;
 import nikonorov.net.signapp.authscreen.model.ModelAuthScreenImpl;
@@ -167,7 +168,37 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                 break;
             }
             case ENTER_ONE_PASS_FRAGMENT: {
-                changeFragment(FragmentType.REGULAR_PASS_FRAGMENT, true);
+                view.showPreloader(R.string.sending_status);
+
+                Subscription subscription = model.requestOneTimePass(null).subscribe(new Observer<NetworkResponse>() {
+                    @Override
+                    public void onCompleted() {
+                        view.hidePreloader();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.hidePreloader();
+                        Logger.e(PresenterAuthScreen.class.getName(), e);
+                    }
+
+                    @Override
+                    public void onNext(NetworkResponse networkResponse) {
+                        view.hidePreloader();
+                        switch (networkResponse.code){
+                            case OK: {
+                                break;
+                            }
+                            case NETWORK_ERROR:
+                            case WRONG_EMAIL:{
+                                view.showErrorMessage(networkResponse.msg);
+                                break;
+                            }
+                        }
+                    }
+                });
+
+                subscriptions.add(subscription);
                 break;
             }
             case REGULAR_PASS_FRAGMENT: {

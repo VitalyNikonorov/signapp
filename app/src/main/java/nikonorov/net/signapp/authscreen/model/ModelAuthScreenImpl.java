@@ -7,6 +7,7 @@ import nikonorov.net.signapp.authscreen.presenter.PresenterAuthScreen;
 import nikonorov.net.signapp.data.DataSource;
 import nikonorov.net.signapp.network.NetworkManager;
 import nikonorov.net.signapp.network.entity.NetworkResponse;
+import nikonorov.net.signapp.utils.Logger;
 import rx.Observable;
 
 /**
@@ -15,6 +16,7 @@ import rx.Observable;
 
 public class ModelAuthScreenImpl implements ModelAuthScreen {
 
+    private AuthData lastData = null;
     private PresenterAuthScreen presenter;
     @Inject
     DataSource dataSource;
@@ -29,7 +31,17 @@ public class ModelAuthScreenImpl implements ModelAuthScreen {
 
     @Override
     public Observable<NetworkResponse> requestOneTimePass(AuthData data) {
-        return networkManager.requestOnTimePass(data);
+        if (data == null){
+            if (lastData == null){
+                Logger.e(this.getClass().getName(), new Throwable());
+                return Observable.empty();
+            } else {
+                return networkManager.requestOneTimePass(lastData);
+            }
+        } else {
+            lastData = data;
+            return networkManager.requestOneTimePass(data);
+        }
     }
 
     @Override

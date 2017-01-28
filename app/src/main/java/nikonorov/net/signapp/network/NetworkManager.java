@@ -11,7 +11,7 @@ import rx.Observable;
 
 public interface NetworkManager {
 
-    Observable<NetworkResponse> requestOnTimePass(AuthData data);
+    Observable<NetworkResponse> requestOneTimePass(AuthData data);
     Observable<NetworkResponse> enterByCode(AuthData data);
     Observable<NetworkResponse> enterByRegularPass(AuthData data);
 

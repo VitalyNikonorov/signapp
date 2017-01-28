@@ -89,7 +89,9 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
 
     @Override
     public void hidePreloader() {
-        preloaderDialog.hide();
+        if (preloaderDialog != null) {
+            preloaderDialog.hide();
+        }
     }
 
     @Override
@@ -106,6 +108,8 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
     public void onLoggedIn() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        preloaderDialog.dismiss();
+        preloaderDialog = null;
         this.finish();
     }
 

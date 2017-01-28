@@ -62,7 +62,7 @@ public class NetworkMock implements NetworkManager {
     }
 
     @Override
-    public Observable<NetworkResponse> requestOnTimePass(AuthData data) {
+    public Observable<NetworkResponse> requestOneTimePass(AuthData data) {
 
         return Observable.just(data.login)
                 .delay(DELAY, TimeUnit.MILLISECONDS)
