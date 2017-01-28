@@ -29,7 +29,7 @@ public class DataSourceImpl implements DataSource {
 
     @Provides
     @Singleton
-    public DataSourceImpl provideDataSource(Context appContext){
+    public DataSource provideDataSource(Context appContext){
         return new DataSourceImpl(appContext);
     }
 

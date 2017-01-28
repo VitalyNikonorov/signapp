@@ -25,7 +25,7 @@ public class App extends Application {
     protected AppComponent buildComponent() {
         return DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
-                .dataSource(new DataSourceImpl())
+                .dataSourceImpl(new DataSourceImpl())
                 .networkMock(new NetworkMock())
                 .build();
     }

@@ -54,7 +54,7 @@ public class NetworkMock implements NetworkManager {
         return new NetworkMock(appContext);
     }
 
-    public boolean isNetworkAvailable() {
+    private boolean isNetworkAvailable() {
         ConnectivityManager cm =
                 (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();

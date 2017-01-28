@@ -3,6 +3,7 @@ package nikonorov.net.signapp.authscreen.view.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +82,7 @@ public class FragmentAuth extends Fragment {
     }
 
     private void initView() {
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(type.title);
         description.setText(type.description);
         loginField.setHint(type.fieldHints[0]);
 

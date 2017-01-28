@@ -20,6 +20,7 @@
     <string name="pass">Пароль</string>
     <string name="wrong_email_or_pass">Неверный адрес электронной почты или пароль</string>
     <string name="empty"></string>
+    <string name="exit">Выход</string>
 
     <string name="tag_main_btn">Main Button</string>
     <string name="tag_additional_btn">Additional Button</string>

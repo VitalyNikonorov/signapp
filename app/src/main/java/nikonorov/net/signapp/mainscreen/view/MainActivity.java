@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements ViewMainScreen, V
         setContentView(R.layout.activity_logout);
         presenter = new PresenterMainScreenImpl(this);
         findViewById(R.id.logout_btn).setOnClickListener(this);
+        getSupportActionBar().setTitle(R.string.exit);
     }
 
     @Override
