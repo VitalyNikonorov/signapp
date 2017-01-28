@@ -1,5 +1,7 @@
 package nikonorov.net.signapp.authscreen.model;
 
+import android.support.annotation.Nullable;
+
 import javax.inject.Inject;
 
 import nikonorov.net.signapp.App;
@@ -57,5 +59,11 @@ public class ModelAuthScreenImpl implements ModelAuthScreen {
     @Override
     public void saveToken(String token) {
         dataSource.saveToken(token);
+    }
+
+    @Nullable
+    @Override
+    public String checkToken() {
+        return dataSource.getToken();
     }
 }

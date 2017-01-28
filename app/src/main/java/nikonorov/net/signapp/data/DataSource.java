@@ -1,5 +1,7 @@
 package nikonorov.net.signapp.data;
 
+import android.support.annotation.Nullable;
+
 /**
  * Created by vitaly on 28.01.17.
  */
@@ -7,6 +9,6 @@ package nikonorov.net.signapp.data;
 public interface DataSource {
 
     void saveToken(String token);
-    String getToken();
+    @Nullable String getToken();
     void clearToken();
 }

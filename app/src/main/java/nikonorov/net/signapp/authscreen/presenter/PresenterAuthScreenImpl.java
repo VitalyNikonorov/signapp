@@ -56,6 +56,10 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
 
     @Override
     public void onStart() {
+        if (model.checkToken() != null){
+            view.onLoggedIn();
+            return;
+        }
         changeFragment(currentFragment, false);
         unSubscribeAll();
     }

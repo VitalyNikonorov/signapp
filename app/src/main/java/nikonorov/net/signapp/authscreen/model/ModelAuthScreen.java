@@ -1,5 +1,7 @@
 package nikonorov.net.signapp.authscreen.model;
 
+import android.support.annotation.Nullable;
+
 import nikonorov.net.signapp.network.entity.NetworkResponse;
 import rx.Observable;
 
@@ -13,5 +15,6 @@ public interface ModelAuthScreen {
     Observable<NetworkResponse> enterByCode(AuthData data);
     Observable<NetworkResponse> enterByRegularPass(AuthData data);
     void saveToken(String token);
+    @Nullable String checkToken();
 
 }
