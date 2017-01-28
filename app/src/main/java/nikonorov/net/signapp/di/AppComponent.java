@@ -6,6 +6,7 @@ import dagger.Component;
 import nikonorov.net.signapp.authscreen.model.ModelAuthScreenImpl;
 import nikonorov.net.signapp.data.DataSourceImpl;
 import nikonorov.net.signapp.network.NetworkMock;
+import nikonorov.net.signapp.sync.SyncService;
 
 /**
  * Created by vitaly on 27.01.17.
@@ -16,4 +17,5 @@ import nikonorov.net.signapp.network.NetworkMock;
 public interface AppComponent {
 
     void inject(ModelAuthScreenImpl modelAuthScreen);
+    void inject(SyncService syncService);
 }
