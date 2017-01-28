@@ -20,7 +20,7 @@ import rx.subscriptions.Subscriptions;
 
 public class PresenterAuthScreenImpl implements PresenterAuthScreen {
 
-    enum SubscriptionsType{
+    private enum SubscriptionsType{
         ONE_TIME_PASS(0),
         ENTER_BY_CODE(1),
         ENTER_BY_PASS(2);
