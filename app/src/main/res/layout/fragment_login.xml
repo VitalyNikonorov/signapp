@@ -20,6 +20,7 @@
 
     <Button
         android:id="@+id/login_action_btn"
+        android:enabled="false"
         android:text="@string/get_code"
         style="@style/LoginMainActionBtn" />
 
