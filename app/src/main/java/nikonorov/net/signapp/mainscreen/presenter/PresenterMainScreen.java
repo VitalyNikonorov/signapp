@@ -5,4 +5,7 @@ package nikonorov.net.signapp.mainscreen.presenter;
  */
 
 public interface PresenterMainScreen {
+
+    void onLogoutClick();
+
 }

@@ -5,4 +5,7 @@ package nikonorov.net.signapp.mainscreen.view;
  */
 
 public interface ViewMainScreen {
+
+    void openLoginActivity();
+
 }

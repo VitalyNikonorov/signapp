@@ -2,6 +2,7 @@ package nikonorov.net.signapp.authscreen.view;
 
 import android.app.Dialog;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import nikonorov.net.signapp.authscreen.presenter.PresenterAuthScreen;
 import nikonorov.net.signapp.authscreen.presenter.PresenterAuthScreenImpl;
 import nikonorov.net.signapp.authscreen.view.fragments.FragmentAuth;
 import nikonorov.net.signapp.authscreen.view.fragments.FragmentType;
+import nikonorov.net.signapp.mainscreen.view.MainActivity;
 
 /**
  * Created by vitaly on 27.01.17.
@@ -92,6 +94,13 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
     @Override
     public void setDescription(String s, FragmentType type) {
         fragments[type.id].setDescription(s);
+    }
+
+    @Override
+    public void onLoggedIn() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        this.finish();
     }
 
     public void onFragmentRestored(FragmentType type){

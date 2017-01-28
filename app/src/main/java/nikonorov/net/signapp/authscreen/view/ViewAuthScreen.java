@@ -15,5 +15,6 @@ public interface ViewAuthScreen {
     void hidePreloader();
     AuthData getAuthData(FragmentType type);
     void setDescription(String s, FragmentType type);
+    void onLoggedIn();
 
 }

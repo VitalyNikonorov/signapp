@@ -5,4 +5,7 @@ package nikonorov.net.signapp.mainscreen.model;
  */
 
 public interface ModelMainScreen {
+
+    void logout();
+
 }
