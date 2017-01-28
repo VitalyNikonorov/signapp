@@ -49,7 +49,7 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
     public void onMainActionBtnClick() {
         switch (currentFragment){
             case ONE_PASS_FRAGMENT:{
-                view.showPreloader();
+                view.showPreloader(currentFragment.preloaderMsg);
                 AuthData data = view.getAuthData(currentFragment);
 
                 Subscription subscription = model.requestOneTimePass(data).subscribe(new Observer<NetworkResponse>() {
@@ -87,7 +87,7 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
             }
             case ENTER_ONE_PASS_FRAGMENT: {
 
-                view.showPreloader();
+                view.showPreloader(currentFragment.preloaderMsg);
                 AuthData data = view.getAuthData(currentFragment);
 
                 Subscription subscription = model.enterByCode(data).subscribe(new Observer<NetworkResponse>() {

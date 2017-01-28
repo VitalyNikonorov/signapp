@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
 import nikonorov.net.signapp.R;
 import nikonorov.net.signapp.authscreen.model.AuthData;
@@ -24,6 +25,7 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
     private FragmentAuth[] fragments = new FragmentAuth[FragmentType.values().length];
     private PresenterAuthScreen presenter;
     private Dialog preloaderDialog;
+    private TextView preloaderMsg;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,10 +64,12 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
         preloaderDialog = new Dialog(AuthActivity.this);
         preloaderDialog.setContentView(R.layout.preloader_popup);
         preloaderDialog.setCancelable(false);
+        preloaderMsg = (TextView) preloaderDialog.findViewById(R.id.preloader_msg);
     }
 
     @Override
-    public void showPreloader() {
+    public void showPreloader(int stringId) {
+        preloaderMsg.setText(stringId);
         preloaderDialog.show();
     }
 

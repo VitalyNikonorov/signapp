@@ -13,6 +13,7 @@
 
     <TextView
         android:layout_toRightOf="@+id/popup_progress"
+        android:id="@+id/preloader_msg"
         android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:text="@string/sending_status"

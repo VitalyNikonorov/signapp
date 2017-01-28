@@ -10,7 +10,7 @@ import nikonorov.net.signapp.authscreen.view.fragments.FragmentType;
 public interface ViewAuthScreen {
 
     void setFragment(FragmentType type, boolean needAddToStack);
-    void showPreloader();
+    void showPreloader(int stringId);
     void showErrorMessage(String message);
     void hidePreloader();
     AuthData getAuthData(FragmentType type);
