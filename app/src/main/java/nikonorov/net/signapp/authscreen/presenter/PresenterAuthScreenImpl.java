@@ -45,7 +45,7 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
         for (int i = 0; i < subscriptions.length; i++){
             subscriptions[i] = Subscriptions.empty();
         }
-
+        currentFragment = FragmentType.ONE_PASS_FRAGMENT;
     }
 
     private void unSubscribeAll(){
@@ -56,7 +56,7 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
 
     @Override
     public void onStart() {
-        changeFragment(FragmentType.ONE_PASS_FRAGMENT, false);
+        changeFragment(currentFragment, false);
         unSubscribeAll();
     }
 
