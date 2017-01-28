@@ -10,10 +10,8 @@ import nikonorov.net.signapp.authscreen.view.ViewAuthScreen;
 import nikonorov.net.signapp.authscreen.view.fragments.FragmentType;
 import nikonorov.net.signapp.network.entity.NetworkResponse;
 import nikonorov.net.signapp.utils.Logger;
-import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
 import rx.subscriptions.Subscriptions;
 
 /**
@@ -22,28 +20,49 @@ import rx.subscriptions.Subscriptions;
 
 public class PresenterAuthScreenImpl implements PresenterAuthScreen {
 
+    enum SubscriptionsType{
+        ONE_TIME_PASS(0),
+        ENTER_BY_CODE(1),
+        ENTER_BY_PASS(2);
+
+        SubscriptionsType(int id) {
+            this.id = id;
+        }
+
+        public final int id;
+    }
+
     private ViewAuthScreen view;
     private ModelAuthScreen model;
     private FragmentType currentFragment;
-    private Subscription onTimePassSubscription = Subscriptions.empty();
-    private Subscription enterByCodeSubscription = Subscriptions.empty();
-    private Subscription enterByRegularPassSubscription = Subscriptions.empty();
-
-    private CompositeSubscription subscriptions = new CompositeSubscription();
+    private Subscription[] subscriptions;
 
     public PresenterAuthScreenImpl(ViewAuthScreen view) {
         this.view = view;
         model = new ModelAuthScreenImpl(this);
+        subscriptions = new Subscription[SubscriptionsType.values().length];
+
+        for (int i = 0; i < subscriptions.length; i++){
+            subscriptions[i] = Subscriptions.empty();
+        }
+
+    }
+
+    private void unSubscribeAll(){
+        for (Subscription subscription : subscriptions) {
+            prepareSubscription(subscription);
+        }
     }
 
     @Override
     public void onStart() {
         changeFragment(FragmentType.ONE_PASS_FRAGMENT, false);
+        unSubscribeAll();
     }
 
     @Override
     public void onStop() {
-        subscriptions.unsubscribe();
+        unSubscribeAll();
         view.hidePreloader();
     }
 
@@ -59,9 +78,9 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                 view.showPreloader(currentFragment.preloaderMsg);
                 AuthData data = view.getAuthData(currentFragment);
 
-                prepareSubscription(onTimePassSubscription);
+                prepareSubscription(subscriptions[SubscriptionsType.ONE_TIME_PASS.id]);
 
-                onTimePassSubscription = model.requestOneTimePass(data).subscribe(new Observer<NetworkResponse>() {
+                subscriptions[SubscriptionsType.ONE_TIME_PASS.id] = model.requestOneTimePass(data).subscribe(new Observer<NetworkResponse>() {
                     @Override
                     public void onCompleted() {
                         view.hidePreloader();
@@ -90,8 +109,6 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                         }
                     }
                 });
-
-                subscriptions.add(onTimePassSubscription);
                 break;
             }
             case ENTER_ONE_PASS_FRAGMENT: {
@@ -99,9 +116,9 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                 view.showPreloader(currentFragment.preloaderMsg);
                 AuthData data = view.getAuthData(currentFragment);
 
-                prepareSubscription(enterByCodeSubscription);
+                prepareSubscription(subscriptions[SubscriptionsType.ENTER_BY_CODE.id]);
 
-                enterByCodeSubscription = model.enterByCode(data).subscribe(new Observer<NetworkResponse>() {
+                subscriptions[SubscriptionsType.ENTER_BY_CODE.id] = model.enterByCode(data).subscribe(new Observer<NetworkResponse>() {
                     @Override
                     public void onCompleted() {
                         view.hidePreloader();
@@ -129,7 +146,6 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                         }
                     }
                 });
-                subscriptions.add(enterByCodeSubscription);
                 break;
             }
 
@@ -137,9 +153,9 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                 view.showPreloader(currentFragment.preloaderMsg);
                 AuthData data = view.getAuthData(currentFragment);
 
-                prepareSubscription(enterByRegularPassSubscription);
+                prepareSubscription(subscriptions[SubscriptionsType.ENTER_BY_PASS.id]);
 
-                enterByRegularPassSubscription = model.enterByRegularPass(data).subscribe(new Observer<NetworkResponse>() {
+                subscriptions[SubscriptionsType.ENTER_BY_PASS.id] = model.enterByRegularPass(data).subscribe(new Observer<NetworkResponse>() {
                     @Override
                     public void onCompleted() {
                         view.hidePreloader();
@@ -167,7 +183,6 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                         }
                     }
                 });
-                subscriptions.add(enterByRegularPassSubscription);
                 break;
             }
         }
@@ -189,7 +204,9 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
             case ENTER_ONE_PASS_FRAGMENT: {
                 view.showPreloader(R.string.sending_status);
 
-                Subscription subscription = model.requestOneTimePass(null).subscribe(new Observer<NetworkResponse>() {
+                prepareSubscription(subscriptions[SubscriptionsType.ONE_TIME_PASS.id]);
+
+                subscriptions[SubscriptionsType.ONE_TIME_PASS.id] = model.requestOneTimePass(null).subscribe(new Observer<NetworkResponse>() {
                     @Override
                     public void onCompleted() {
                         view.hidePreloader();
@@ -216,8 +233,6 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                         }
                     }
                 });
-
-                subscriptions.add(subscription);
                 break;
             }
             case REGULAR_PASS_FRAGMENT: {
