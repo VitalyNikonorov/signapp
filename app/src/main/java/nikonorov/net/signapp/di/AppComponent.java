@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import nikonorov.net.signapp.authscreen.model.ModelAuthScreenImpl;
 import nikonorov.net.signapp.data.DataSourceImpl;
+import nikonorov.net.signapp.mainscreen.model.ModelMainScreenImpl;
 import nikonorov.net.signapp.network.NetworkMock;
 import nikonorov.net.signapp.sync.SyncService;
 
@@ -18,4 +19,5 @@ public interface AppComponent {
 
     void inject(ModelAuthScreenImpl modelAuthScreen);
     void inject(SyncService syncService);
+    void inject(ModelMainScreenImpl modelMainScreen);
 }

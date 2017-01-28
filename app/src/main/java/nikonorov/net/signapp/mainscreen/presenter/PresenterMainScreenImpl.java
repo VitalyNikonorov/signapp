@@ -20,6 +20,7 @@ public class PresenterMainScreenImpl implements PresenterMainScreen {
 
     @Override
     public void onLogoutClick() {
+        model.logout();
         view.openLoginActivity();
     }
 }
