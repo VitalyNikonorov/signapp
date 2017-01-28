@@ -25,7 +25,7 @@
 
         <service android:name=".sync.SyncService"/>
 
-        <receiver android:name=".sync.SyncEventReciever">
+        <receiver android:name=".sync.SyncEventReceiver">
             <action android:name="android.intent.action.BOOT_COMPLETED" />
         </receiver>
 

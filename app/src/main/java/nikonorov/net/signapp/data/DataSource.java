@@ -3,7 +3,8 @@ package nikonorov.net.signapp.data;
 import android.support.annotation.Nullable;
 
 /**
- * Created by vitaly on 28.01.17.
+ * Main entity for working with data
+ * here will be api for working with db if it will be need
  */
 
 public interface DataSource {

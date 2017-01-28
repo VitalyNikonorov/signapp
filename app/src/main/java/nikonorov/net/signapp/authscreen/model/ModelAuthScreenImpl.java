@@ -13,7 +13,7 @@ import nikonorov.net.signapp.utils.Logger;
 import rx.Observable;
 
 /**
- * Created by vitaly on 27.01.17.
+ * Implementation of model (logic) for auth screen
  */
 
 public class ModelAuthScreenImpl implements ModelAuthScreen {

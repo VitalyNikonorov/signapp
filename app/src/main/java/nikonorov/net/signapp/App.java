@@ -9,7 +9,7 @@ import nikonorov.net.signapp.di.DaggerAppComponent;
 import nikonorov.net.signapp.network.NetworkMock;
 
 /**
- * Created by vitaly on 27.01.17.
+ * Main application class
  */
 
 public class App extends Application {

@@ -5,10 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 
 /**
- * Created by vitaly on 28.01.17.
+ * Mock receiver for handling alarm manager messages
  */
 
-public class SyncEventReciever extends BroadcastReceiver {
+public class SyncEventReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         //Start sync service

@@ -12,6 +12,11 @@ public interface PresenterAuthScreen {
     void onStop();
     void onMainActionBtnClick();
     void onAdditionalBtnClick();
+
+    /**
+     * Method for set current fragment type after restoring fragment
+     * @param type - current started fragment
+     */
     void onFragmentRestored(FragmentType type);
 
 }

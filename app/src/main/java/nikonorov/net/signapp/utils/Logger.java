@@ -3,7 +3,8 @@ package nikonorov.net.signapp.utils;
 import android.util.Log;
 
 /**
- * Created by vitaly on 28.01.17.
+ * Main class for turn on/off logging if needs
+ * it should depend on building options
  */
 
 public class Logger {

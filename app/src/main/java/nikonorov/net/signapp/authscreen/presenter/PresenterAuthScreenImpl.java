@@ -77,6 +77,10 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
         currentFragment = type;
     }
 
+    /**
+     * ClickListener for main button
+     * defines behavior by current fragment type
+     */
     @Override
     public void onMainActionBtnClick() {
         switch (currentFragment){

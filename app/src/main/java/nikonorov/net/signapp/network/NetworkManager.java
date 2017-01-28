@@ -5,7 +5,8 @@ import nikonorov.net.signapp.network.entity.NetworkResponse;
 import rx.Observable;
 
 /**
- * Created by vitaly on 27.01.17.
+ * Main entity for working with network
+ * it should be done by any way, fir example with retrofit library
  */
 
 

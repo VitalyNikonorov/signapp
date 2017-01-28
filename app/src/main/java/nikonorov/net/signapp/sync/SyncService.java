@@ -13,7 +13,8 @@ import nikonorov.net.signapp.network.NetworkManager;
 
 /**
  * Service for synchronization
- *
+ * Work of this class thread unsafety and should be done with async methods
+ * (rx, loaders, handler/looper, java-thread and any other)
  */
 
 public class SyncService extends Service {

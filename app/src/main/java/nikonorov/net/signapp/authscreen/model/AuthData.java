@@ -1,7 +1,7 @@
 package nikonorov.net.signapp.authscreen.model;
 
 /**
- * Created by vitaly on 28.01.17.
+ * Entity for transporting auth data of user in app
  */
 
 public class AuthData {

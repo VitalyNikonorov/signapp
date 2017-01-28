@@ -1,7 +1,7 @@
 package nikonorov.net.signapp.network.entity;
 
 /**
- * Created by vitaly on 28.01.17.
+ * Enum of responses from server (if it will be got in app)
  */
 
 public enum CodeResponse {
