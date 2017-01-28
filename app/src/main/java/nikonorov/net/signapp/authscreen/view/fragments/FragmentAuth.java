@@ -120,6 +120,11 @@ public class FragmentAuth extends Fragment implements TextWatcher {
         sendOn = s;
     }
 
+    private void setHomeButton(boolean isNeed){
+        ((AuthActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(isNeed);
+        ((AuthActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(isNeed);
+    }
+
     private void initView() {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(type.title);
         loginField.setHint(type.fieldHints[0]);
@@ -131,10 +136,13 @@ public class FragmentAuth extends Fragment implements TextWatcher {
 
         switch (type){
             case ONE_PASS_FRAGMENT:
+                setHomeButton(false);
                 passField.setVisibility(View.GONE);
                 description.setText(type.description);
                 break;
             case ENTER_ONE_PASS_FRAGMENT:
+
+                setHomeButton(true);
                 passField.setVisibility(View.GONE);
                 description.setText(getString(type.description, sendOn));
                 additionalBtn.setText(getString(R.string.resend_code, String.format(" %d с", DELAY_IN_SECONDS)));
@@ -168,6 +176,7 @@ public class FragmentAuth extends Fragment implements TextWatcher {
                 break;
 
             case REGULAR_PASS_FRAGMENT:
+                setHomeButton(true);
                 description.setText(type.description);
                 passField.setVisibility(View.VISIBLE);
                 passField.setHint(type.fieldHints[1]);
