@@ -67,6 +67,7 @@ public class AuthActivity extends AppCompatActivity implements ViewAuthScreen, V
             transaction.addToBackStack(null);
         }
         transaction.commit();
+        fragments[fragment.id].refreshView();
     }
 
     private void initProgressDialog() {

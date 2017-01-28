@@ -125,6 +125,12 @@ public class FragmentAuth extends Fragment implements TextWatcher {
         ((AuthActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(isNeed);
     }
 
+    public void refreshView(){
+        if (rootView != null){
+            initView();
+        }
+    }
+
     private void initView() {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(type.title);
         loginField.setHint(type.fieldHints[0]);
@@ -147,7 +153,6 @@ public class FragmentAuth extends Fragment implements TextWatcher {
                 description.setText(getString(type.description, sendOn));
                 additionalBtn.setText(getString(R.string.resend_code, String.format(" %d с", DELAY_IN_SECONDS)));
                 additionalBtn.setEnabled(false);
-                description.setText(type.description);
 
                 prepareSubscription(subscription);
 
