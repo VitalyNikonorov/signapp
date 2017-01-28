@@ -34,12 +34,17 @@ import static nikonorov.net.signapp.utils.SubscriptionUtils.prepareSubscription;
 
 public class FragmentAuth extends Fragment implements TextWatcher {
 
+    private static final int ONE_SECOND_MILLIS = 1000;
+    private static final int DELAY_IN_SECONDS = 1000;
+
     private TextView description;
     private EditText loginField;
     private EditText passField;
     private TextView additionalBtn;
     private TextView loginTip;
     private Button mainActionBtn;
+
+    private View rootView;
 
     private FragmentType type;
     private String sendOn;
@@ -49,15 +54,14 @@ public class FragmentAuth extends Fragment implements TextWatcher {
         this.type = type;
     }
 
-//    @Override
-//    public void onViewCreated(View view, Bundle savedInstanceState) {
-//        initView();
-//    }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        initView();
+    }
 
     @Override
     public void onStart() {
         super.onStart();
-        initView();
         description.setText(getString(type.description, sendOn));
         ((AuthActivity)getActivity()).onFragmentRestored(type);
     }
@@ -65,26 +69,26 @@ public class FragmentAuth extends Fragment implements TextWatcher {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
-        mainActionBtn = (Button) view.findViewById(R.id.login_action_btn);
+        rootView = inflater.inflate(R.layout.fragment_login, container, false);
+        mainActionBtn = (Button) rootView.findViewById(R.id.login_action_btn);
         mainActionBtn.setTag(getResources().getString(R.string.tag_main_btn));
         mainActionBtn.setOnClickListener((AuthActivity)getActivity());
 
-        additionalBtn = (TextView) view.findViewById(R.id.additional_btn);
+        additionalBtn = (TextView) rootView.findViewById(R.id.additional_btn);
         additionalBtn.setTag(getResources().getString(R.string.tag_additional_btn));
         additionalBtn.setOnClickListener((AuthActivity) getActivity());
 
-        description = (TextView) view.findViewById(R.id.login_description);
-        loginField = (EditText) view.findViewById(R.id.login_login_field);
+        description = (TextView) rootView.findViewById(R.id.login_description);
+        loginField = (EditText) rootView.findViewById(R.id.login_login_field);
 
         loginField.addTextChangedListener(this);
 
-        passField = (EditText) view.findViewById(R.id.login_pass_field);
+        passField = (EditText) rootView.findViewById(R.id.login_pass_field);
         passField.addTextChangedListener(this);
 
-        loginTip = (TextView) view.findViewById(R.id.login_tip_tv);
+        loginTip = (TextView) rootView.findViewById(R.id.login_tip_tv);
 
-        return view;
+        return rootView;
     }
 
     private void checkMainBtnState(){
@@ -118,7 +122,6 @@ public class FragmentAuth extends Fragment implements TextWatcher {
 
     private void initView() {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(type.title);
-        description.setText(type.description);
         loginField.setHint(type.fieldHints[0]);
 
         mainActionBtn.setText(type.mainBtnCaption);
@@ -129,16 +132,19 @@ public class FragmentAuth extends Fragment implements TextWatcher {
         switch (type){
             case ONE_PASS_FRAGMENT:
                 passField.setVisibility(View.GONE);
+                description.setText(type.description);
                 break;
             case ENTER_ONE_PASS_FRAGMENT:
                 passField.setVisibility(View.GONE);
-                additionalBtn.setText(getString(R.string.resend_code, String.format(" %d с", 60)));
+                description.setText(getString(type.description, sendOn));
+                additionalBtn.setText(getString(R.string.resend_code, String.format(" %d с", DELAY_IN_SECONDS)));
+                description.setText(type.description);
 
                 prepareSubscription(subscription);
 
                 subscription = Observable
-                        .interval(1000, TimeUnit.MILLISECONDS)
-                        .take(60)
+                        .interval(ONE_SECOND_MILLIS, TimeUnit.MILLISECONDS)
+                        .take(DELAY_IN_SECONDS)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Subscriber<Long>() {
@@ -155,22 +161,19 @@ public class FragmentAuth extends Fragment implements TextWatcher {
 
                             @Override
                             public void onNext(Long i) {
-                                additionalBtn.setText(getString(R.string.resend_code, String.format(" %d с", 59 - i)));
+                                additionalBtn.setText(getString(R.string.resend_code, String.format(" %d с", DELAY_IN_SECONDS - 1 - i)));
                                 additionalBtn.setEnabled(false);
                             }
                         });
                 break;
 
             case REGULAR_PASS_FRAGMENT:
+                description.setText(type.description);
                 passField.setVisibility(View.VISIBLE);
                 passField.setHint(type.fieldHints[1]);
                 break;
         }
-
-
-
     }
-
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
