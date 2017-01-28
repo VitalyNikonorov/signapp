@@ -14,9 +14,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.concurrent.TimeUnit;
+
 import nikonorov.net.signapp.R;
 import nikonorov.net.signapp.authscreen.model.AuthData;
 import nikonorov.net.signapp.authscreen.view.AuthActivity;
+import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.Subscriptions;
+
+import static nikonorov.net.signapp.utils.SubscriptionUtils.prepareSubscription;
 
 /**
  * Created by vitaly on 27.01.17.
@@ -33,19 +43,21 @@ public class FragmentAuth extends Fragment implements TextWatcher {
 
     private FragmentType type;
     private String sendOn;
+    private Subscription subscription = Subscriptions.empty();
 
     public void setType(FragmentType type) {
         this.type = type;
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        initView();
-    }
+//    @Override
+//    public void onViewCreated(View view, Bundle savedInstanceState) {
+//        initView();
+//    }
 
     @Override
     public void onStart() {
         super.onStart();
+        initView();
         description.setText(getString(type.description, sendOn));
         ((AuthActivity)getActivity()).onFragmentRestored(type);
     }
@@ -109,17 +121,54 @@ public class FragmentAuth extends Fragment implements TextWatcher {
         description.setText(type.description);
         loginField.setHint(type.fieldHints[0]);
 
-        if (type.fieldHints.length == 1){
-            passField.setVisibility(View.GONE);
-        } else {
-            passField.setVisibility(View.VISIBLE);
-            passField.setHint(type.fieldHints[1]);
-        }
-
         mainActionBtn.setText(type.mainBtnCaption);
         additionalBtn.setText(type.additionalBtnCaption);
         loginTip.setText(type.tip);
         checkMainBtnState();
+
+        switch (type){
+            case ONE_PASS_FRAGMENT:
+                passField.setVisibility(View.GONE);
+                break;
+            case ENTER_ONE_PASS_FRAGMENT:
+                passField.setVisibility(View.GONE);
+                additionalBtn.setText(getString(R.string.resend_code, String.format(" %d с", 60)));
+
+                prepareSubscription(subscription);
+
+                subscription = Observable
+                        .interval(1000, TimeUnit.MILLISECONDS)
+                        .take(60)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<Long>() {
+                            @Override
+                            public void onCompleted() {
+                                additionalBtn.setEnabled(true);
+                                additionalBtn.setText(getString(R.string.resend_code, ""));
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                additionalBtn.setEnabled(true);
+                            }
+
+                            @Override
+                            public void onNext(Long i) {
+                                additionalBtn.setText(getString(R.string.resend_code, String.format(" %d с", 59 - i)));
+                                additionalBtn.setEnabled(false);
+                            }
+                        });
+                break;
+
+            case REGULAR_PASS_FRAGMENT:
+                passField.setVisibility(View.VISIBLE);
+                passField.setHint(type.fieldHints[1]);
+                break;
+        }
+
+
+
     }
 
     @Override

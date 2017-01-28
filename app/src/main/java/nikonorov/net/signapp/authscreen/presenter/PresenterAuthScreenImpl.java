@@ -14,6 +14,8 @@ import rx.Observer;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
+import static nikonorov.net.signapp.utils.SubscriptionUtils.prepareSubscription;
+
 /**
  * Created by vitaly on 27.01.17.
  */
@@ -194,12 +196,6 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
         }
     }
 
-    private void prepareSubscription(@NonNull Subscription subscription){
-        if (!subscription.isUnsubscribed()){
-            subscription.unsubscribe();
-        }
-    }
-
     @Override
     public void onAdditionalBtnClick() {
         switch (currentFragment){
@@ -229,6 +225,7 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                         view.hidePreloader();
                         switch (networkResponse.code){
                             case OK: {
+                                view.setFragment(FragmentType.ENTER_ONE_PASS_FRAGMENT, false);
                                 break;
                             }
                             case NETWORK_ERROR:
