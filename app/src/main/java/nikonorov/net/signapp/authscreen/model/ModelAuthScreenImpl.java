@@ -19,7 +19,7 @@ public class ModelAuthScreenImpl implements ModelAuthScreen {
     private AuthData lastData = null;
     private PresenterAuthScreen presenter;
     @Inject
-    DataSource dataSourceImpl;
+    DataSource dataSource;
 
     @Inject
     NetworkManager networkManager;
@@ -52,5 +52,10 @@ public class ModelAuthScreenImpl implements ModelAuthScreen {
     @Override
     public Observable<NetworkResponse> enterByRegularPass(AuthData data) {
         return networkManager.enterByRegularPass(data);
+    }
+
+    @Override
+    public void saveToken(String token) {
+        dataSource.saveToken(token);
     }
 }

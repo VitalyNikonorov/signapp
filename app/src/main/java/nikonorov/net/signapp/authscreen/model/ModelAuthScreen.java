@@ -12,5 +12,6 @@ public interface ModelAuthScreen {
     Observable<NetworkResponse> requestOneTimePass(AuthData data);
     Observable<NetworkResponse> enterByCode(AuthData data);
     Observable<NetworkResponse> enterByRegularPass(AuthData data);
+    void saveToken(String token);
 
 }

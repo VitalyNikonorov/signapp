@@ -135,6 +135,7 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                         view.hidePreloader();
                         switch (networkResponse.code){
                             case OK: {
+                                model.saveToken(networkResponse.msg);
                                 view.onLoggedIn();
                                 break;
                             }
@@ -172,6 +173,7 @@ public class PresenterAuthScreenImpl implements PresenterAuthScreen {
                         view.hidePreloader();
                         switch (networkResponse.code){
                             case OK: {
+                                model.saveToken(networkResponse.msg);
                                 view.onLoggedIn();
                                 break;
                             }
